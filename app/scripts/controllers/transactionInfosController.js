@@ -30,6 +30,7 @@ angular.module('ethExplorer')
                     }
                     $scope.from = result.from;
                     $scope.gas = result.gas;
+                    $scope.receipt = result.receipt;
                     $scope.gasPrice = result.gasPrice.c[0] + " WEI";
                     $scope.hash = result.hash;
                     $scope.input = result.input; // that's a string
@@ -37,7 +38,7 @@ angular.module('ethExplorer')
                     $scope.to = result.to;
                     $scope.transactionIndex = result.transactionIndex;
                     $scope.ethValue = result.value.c[0] / 10000; 
-                    $scope.txprice = (result.gas * result.gasPrice)/1000000000000000000 + " ETH";
+                    $scope.txprice = (result.receipt.gasUsed * result.gasPrice)/1000000000000000000 + " ETH";
                     if($scope.blockNumber!==undefined){
                         $scope.conf = number - $scope.blockNumber;
                         if($scope.conf===0){
@@ -68,6 +69,7 @@ angular.module('ethExplorer')
 
                 web3.eth.getTransaction($scope.txId,function(error, result) {
                     if(!error){
+												result.receipt = web3.eth.getTransactionReceipt($scope.txId);
                         deferred.resolve(result);
                     }
                     else{
