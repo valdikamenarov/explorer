@@ -34,6 +34,9 @@ angular.module('ethExplorer')
                     $scope.difficulty = ("" + result.difficulty).replace(/['"]+/g, '');
                     $scope.gasLimit = result.gasLimit; // that's a string
                     $scope.nonce = result.nonce;
+                    $scope.transactionsRoot = result.transactionsRoot;
+                    $scope.stateRoot= result.stateRoot;
+                    $scope.receiptsRoot = result.receiptsRoot;
                     $scope.number = result.number;
                     $scope.parentHash = result.parentHash;
                     $scope.blockNumber = result.number;
